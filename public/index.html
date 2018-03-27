@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Bell Quiz</title>
@@ -7,10 +8,11 @@
     <script src="/js/jquery.js"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body onload="init()">
     <h1>Bell Quiz</h1>
 
-    <a href="#" id="btnPush">Tekan Saya</a>
+    <a href="#" id="btnPush">Push</a>
     <script>
         var nama;
         var socket = io.connect();
@@ -20,25 +22,25 @@
         });
 
         socket.on('connect', function () {
-            nama = prompt("Siapa Nama Anda?");
+            nama = prompt('Nhap ten nhom:');
             socket.emit('addUser', nama);
         });
 
         $('#btnPush').mousedown(function () {
-            socket.emit('updateBulb', {user: nama, status:'bulb_on'});
+            socket.emit('updateBulb', { user: nama, status: 'bulb_on' });
         });
 
         $('#btnPush').mouseup(function () {
-            socket.emit('updateBulb', {user: nama, status:'bulb_off'});
+            socket.emit('updateBulb', { user: nama, status: 'bulb_off' });
         });
 
         function touchStart_(event) {
-            socket.emit('updateBulb', {user: nama, status:'bulb_on'});
+            socket.emit('updateBulb', { user: nama, status: 'bulb_on' });
             // alert('hello start');
             return false;
         }
         function touchEnd_(event) {
-            socket.emit('updateBulb', {user: nama, status:'bulb_off'});
+            socket.emit('updateBulb', { user: nama, status: 'bulb_off' });
             // alert('hello end');
             return false;
         }
@@ -62,9 +64,10 @@
         function init() {
             // var mobile = 'android|iphone|ipad';
             // if (mobile.indexOf(navigator.userAgent) != -1) {
-                preventLongPressMenu(document.getElementById('btnPush'));
+            preventLongPressMenu(document.getElementById('btnPush'));
             // }
         }
     </script>
 </body>
+
 </html>
